@@ -5,6 +5,7 @@ export default class Tutorial extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeDueDate = this.onChangeDueDate.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.updatePublished = this.updatePublished.bind(this);
     this.updateTutorial = this.updateTutorial.bind(this);
@@ -15,6 +16,7 @@ export default class Tutorial extends Component {
         key: null,
         title: "",
         description: "",
+        dueDate: "",
         published: false,
       },
       message: "",
@@ -47,6 +49,19 @@ export default class Tutorial extends Component {
         currentTutorial: {
           ...prevState.currentTutorial,
           title: title,
+        },
+      };
+    });
+  }
+
+  onChangeDueDate(e) {
+    const dueDate = e.target.value;
+
+    this.setState(function (prevState) {
+      return {
+        currentTutorial: {
+          ...prevState.currentTutorial,
+          dueDate: dueDate,
         },
       };
     });
@@ -85,12 +100,13 @@ export default class Tutorial extends Component {
     const data = {
       title: this.state.currentTutorial.title,
       description: this.state.currentTutorial.description,
+      dueDate: this.state.currentTutorial.dueDate,
     };
 
     TutorialDataService.update(this.state.currentTutorial.key, data)
       .then(() => {
         this.setState({
-          message: "The tutorial was updated successfully!",
+          message: "The client was updated successfully!",
         });
       })
       .catch((e) => {
@@ -137,12 +153,22 @@ export default class Tutorial extends Component {
                   onChange={this.onChangeDescription}
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="description">Payment Due Date</label>
+                <textarea
+                  type="text"
+                  className="form-control"
+                  id="dueDate"
+                  value={currentTutorial.dueDate}
+                  onChange={this.onChangeDueDate}
+                />
+              </div>
 
               <div className="form-group">
                 <label>
-                  <strong>Status:</strong>
+                  <strong>Payment Status:</strong>
                 </label>
-                {currentTutorial.published ? "Published" : "Pending"}
+                {currentTutorial.published ? "Paid" : "Pending"}
               </div>
             </form>
 
@@ -151,14 +177,14 @@ export default class Tutorial extends Component {
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(false)}
               >
-                UnPublish
+                Undo Payment Status
               </button>
             ) : (
               <button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(true)}
               >
-                Publish
+                Paid
               </button>
             )}
 

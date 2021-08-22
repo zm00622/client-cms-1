@@ -36,6 +36,7 @@ export default class TutorialsList extends Component {
         key: key,
         title: data.title,
         description: data.description,
+        dueDate: data.dueDate,
         published: data.published,
       });
     });

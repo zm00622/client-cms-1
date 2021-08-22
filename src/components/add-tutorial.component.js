@@ -5,6 +5,7 @@ export default class AddTutorial extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeDueDate = this.onChangeDueDate.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.saveTutorial = this.saveTutorial.bind(this);
     this.newTutorial = this.newTutorial.bind(this);
@@ -12,6 +13,7 @@ export default class AddTutorial extends Component {
     this.state = {
       title: "",
       description: "",
+      dueDate: "",
       published: false,
 
       submitted: false,
@@ -21,6 +23,12 @@ export default class AddTutorial extends Component {
   onChangeTitle(e) {
     this.setState({
       title: e.target.value,
+    });
+  }
+
+  onChangeDueDate(e) {
+    this.setState({
+      dueDate: e.target.value,
     });
   }
 
@@ -34,6 +42,7 @@ export default class AddTutorial extends Component {
     let data = {
       title: this.state.title,
       description: this.state.description,
+      dueDate: this.state.dueDate,
       published: false
     };
 
@@ -53,6 +62,7 @@ export default class AddTutorial extends Component {
     this.setState({
       title: "",
       description: "",
+      dueDate: "",
       published: false,
 
       submitted: false,
@@ -87,7 +97,7 @@ export default class AddTutorial extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Address and Contact Information</label>
+              <label htmlFor="description">Contact Information and Notes</label>
               <textarea
                 type="text"
                 className="form-control"
@@ -96,6 +106,19 @@ export default class AddTutorial extends Component {
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 name="description"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="title">Payment Due Date</label>
+              <input
+                type="text"
+                className="form-control"
+                id="dueDate"
+                required
+                value={this.state.dueDate}
+                onChange={this.onChangeDueDate}
+                name="title"
               />
             </div>
 

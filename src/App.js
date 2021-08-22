@@ -1,3 +1,6 @@
+// npm i julian to download date to julian date converter 
+// Use the julian date converter to create timers for each client
+
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,9 +14,9 @@ class App extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/tutorials" className="navbar-brand">
+          {/* <a href="/tutorials" className="navbar-brand">
             Home
-          </a>
+          </a> */}
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/tutorials"} className="nav-link">
